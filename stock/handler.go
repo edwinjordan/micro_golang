@@ -128,7 +128,14 @@ func (h *Handler) handleUpdateStock(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	product, _ := h.store.GetProduct(productID)
+	product, err := h.store.GetProduct(productID)
+	if err != nil {
+		// This shouldn't happen since we just updated it, but handle gracefully
+		http.Error(w, "Product updated but could not retrieve", http.StatusInternalServerError)
+		log.Printf("Error retrieving product after update: %v", err)
+		return
+	}
+
 	json.NewEncoder(w).Encode(product)
 	log.Printf("Updated stock for product %s: %s %d", productID, update.Operation, update.Quantity)
 }

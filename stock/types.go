@@ -16,5 +16,5 @@ type Product struct {
 type StockUpdate struct {
 	ProductID string `json:"product_id"`
 	Quantity  int    `json:"quantity"`
-	Operation string `json:"operation"` // "add" or "remove"
+	Operation string `json:"operation"` // "add", "remove", or "set"
 }
