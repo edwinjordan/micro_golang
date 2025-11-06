@@ -27,6 +27,7 @@ go.work
 # Build artifacts
 producer/producer
 consumer/consumer
+stockservice/stockservice
 *.bin
 
 # OS
